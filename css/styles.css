@@ -13,6 +13,11 @@ body {
   background-size: 100%;
 }
 
+h1, p {
+  color: #EAD90E;
+  background-color: #180701;
+}
+
 .container {
 	width: 600px;
 	margin: 10px auto 10px;
