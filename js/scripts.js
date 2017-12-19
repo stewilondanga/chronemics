@@ -47,7 +47,7 @@ $(document).ready(function(){
    });
 
   // mouse enter add class
-  $(document).on('mouseenter', '.fa-close', function(){
+  $(document).on('mouseenter', '.faded', function(){
     $(this).parent().addClass('active');
   });
 
