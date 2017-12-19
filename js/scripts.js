@@ -35,7 +35,7 @@ function chatBot() {
 			return ["alright, see you around", "good teamwork!"];
 
 		if(this.match('(dumb|stupid|is that all)'))
-			return ["hey i'm just a proof of concept", "you can make me smarter if you'd like"];
+			return ["hey i'm just a proof of concept", "you can make me smarter if you'd like", "Stewart ilondanga made me, what did you make?"];
 
 		if(this.input == 'noop')
 			return;
