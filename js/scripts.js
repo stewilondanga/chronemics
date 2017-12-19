@@ -40,7 +40,7 @@ $(document).ready(function(){
   });  // form
 
   // delete massage
-  $(document).on('click', '.fa-close', function(){
+  $(document).on('click', '.faded', function(){
      $(this).parent().fadeOut(500,function(){
       $(this).remove();
       });
