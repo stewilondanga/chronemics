@@ -5,9 +5,12 @@
 }
 
 body {
-	font-family: Helvetica, Arial, Sans-serif;
+	font-family: Courier;
 	font-size: 13px;
 	background-color: #fafafa;
+  background-image:url("../assets/image.jpeg");
+  background-repeat: no-repeat;
+  background-size: 100%;
 }
 
 .container {

@@ -20,7 +20,10 @@ function chatBot() {
 		this.input = input.toLowerCase();
 
 		if(this.match('(hi|hello|hey|hola|howdy)(\\s|!|\\.|$)'))
-			return "um... hi?", "greetings from Stewart ilondanga";
+			return "um... hi?", "im sending greetings from Stewart ilondanga";
+
+    if(this.match('Who is Stewart ilondanga'))
+      return "Google knows better my friend!";
 
 		if(this.match('what[^ ]* up') || this.match('sup') || this.match('how are you'))
 			return "this github thing is pretty cool, huh?";
@@ -32,7 +35,7 @@ function chatBot() {
 			return "don't be such a negative person or whatever you are :(";
 
 		if(this.match('(cya|bye|see ya|ttyl|talk to you later)'))
-			return ["alright, see you around", "good teamwork!"];
+			return ["alright, see you around", "good teamwork! i sure will tell Stewart ilondanga about this"];
 
 		if(this.match('(dumb|stupid|is that all)'))
 			return ["hey i'm just a proof of concept", "you can make me smarter if you'd like", "Stewart ilondanga made me, what did you make?"];
@@ -40,7 +43,7 @@ function chatBot() {
 		if(this.input == 'noop')
 			return;
 
-		return input + " what?";
+		return input + " what? Search engines can tell you alot, im not one!";
 	}
 
 	/**
@@ -61,7 +64,7 @@ $(function() {
 
 	// chat aliases
 	var you = 'You';
-	var robot = 'Chatbot';
+	var robot = 'Chronemics';
 
 	// slow reply by 400 to 800 ms
 	var delayStart = 400;
