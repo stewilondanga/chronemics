@@ -52,7 +52,7 @@ $(document).ready(function(){
   });
 
   // mouse leave remove class
-  $(document).on('mouseleave', '.fa-close', function(){
+  $(document).on('mouseleave', '.faded', function(){
     $(this).parent().removeClass('active');
   });
 
