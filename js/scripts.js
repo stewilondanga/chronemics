@@ -20,7 +20,7 @@ function chatBot() {
 		this.input = input.toLowerCase();
 
 		if(this.match('(hi|hello|hey|hola|howdy)(\\s|!|\\.|$)'))
-			return "um... hi?" "greetings from Stewart ilondanga";
+			return "um... hi?", "greetings from Stewart ilondanga";
 
 		if(this.match('what[^ ]* up') || this.match('sup') || this.match('how are you'))
 			return "this github thing is pretty cool, huh?";
