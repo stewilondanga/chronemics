@@ -1,61 +1,132 @@
-$(document).ready(function(){
+/* ---------- CHAT BOT ENGINE JS ----------- */
 
-  $('.message-icon').click(function(){
-    $('.chat').fadeToggle(500);
-  });
+function chatBot() {
 
-  // for nicescroll
-  // $('.messages-box').niceScroll({
-  //   cursorcolor:'#5290F5',
-  //   cursoropacitymin:0.7,
-  //   cursorborder:'none',
-  //   cursorborderradius: "3px",
-  //   scrollspeed: 400,
-  //   background: "#ddd",
-  //   railoffset: {left: 7},
-  //   cursorwidth :'4px'
-  // });
+	// current user input
+	this.input;
 
-  // form submit
-  $('form').submit(function(e){
-    e.preventDefault();
-    var $messagesBox = $( ".messages-box" ),
-        messagesBoxHeight = $messagesBox[0].scrollHeight,
-        message = $('input', this).val(),
-        messageLength = message.length;
+	/**
+	 * respondTo
+	 *
+	 * return nothing to skip response
+	 * return string for one response
+	 * return array of strings for multiple responses
+	 *
+	 * @param input - input chat string
+	 * @return reply of chat-bot
+	 */
+	this.respondTo = function(input) {
 
-        if(messageLength > 0){
-          $('input', this).removeClass('error');
-          $messagesBox.append('<div class="message"><i class="fa fa-close"></i> <p>' + message +'</p></div>');
-        }else{
-          $('input', this).addClass('error');
-        }
+		this.input = input.toLowerCase();
 
-        $('input',this).val('');
-        $('input',this).focus();
+		if(this.match('(hi|hello|hey|hola|howdy)(\\s|!|\\.|$)'))
+			return "um... hi?";
 
-     // scroll to see last message
-     $messagesBox.scrollTop( messagesBoxHeight );
+		if(this.match('what[^ ]* up') || this.match('sup') || this.match('how are you'))
+			return "this github thing is pretty cool, huh?";
 
-  });  // form
+		if(this.match('l(ol)+') || this.match('(ha)+(h|$)') || this.match('lmao'))
+			return "what's so funny?";
 
-  // delete massage
-  $(document).on('click', '.fa-close', function(){
-     $(this).parent().fadeOut(500,function(){
-      $(this).remove();
-      });
-   });
+		if(this.match('^no+(\\s|!|\\.|$)'))
+			return "don't be such a negative nancy :(";
 
-  // mouse enter add class
-  $(document).on('mouseenter', '.fa-close', function(){
-    $(this).parent().addClass('active');
-  });
+		if(this.match('(cya|bye|see ya|ttyl|talk to you later)'))
+			return ["alright, see you around", "good teamwork!"];
 
-  // mouse leave remove class
-  $(document).on('mouseleave', '.fa-close', function(){
-    $(this).parent().removeClass('active');
-  });
+		if(this.match('(dumb|stupid|is that all)'))
+			return ["hey i'm just a proof of concept", "you can make me smarter if you'd like"];
 
-});  // document ready
+		if(this.input == 'noop')
+			return;
 
-  
+		return input + " what?";
+	}
+
+	/**
+	 * match
+	 *
+	 * @param regex - regex string to match
+	 * @return boolean - whether or not the input string matches the regex
+	 */
+	this.match = function(regex) {
+
+		return new RegExp(regex).test(this.input);
+	}
+}
+
+/* ---------- START INDEX JS ----------- */
+
+$(function() {
+
+	// chat aliases
+	var you = 'You';
+	var robot = 'Chatbot';
+
+	// slow reply by 400 to 800 ms
+	var delayStart = 400;
+	var delayEnd = 800;
+
+	// initialize
+	var bot = new chatBot();
+	var chat = $('.chat');
+	var waiting = 0;
+	$('.busy').text(robot + ' is typing...');
+
+	// submit user input and get chat-bot's reply
+	var submitChat = function() {
+
+		var input = $('.input input').val();
+		if(input == '') return;
+
+		$('.input input').val('');
+		updateChat(you, input);
+
+		var reply = bot.respondTo(input);
+		if(reply == null) return;
+
+		var latency = Math.floor((Math.random() * (delayEnd - delayStart)) + delayStart);
+		$('.busy').css('display', 'block');
+		waiting++;
+		setTimeout( function() {
+			if(typeof reply === 'string') {
+				updateChat(robot, reply);
+			} else {
+				for(var r in reply) {
+					updateChat(robot, reply[r]);
+				}
+			}
+			if(--waiting == 0) $('.busy').css('display', 'none');
+		}, latency);
+	}
+
+	// add a new line to the chat
+	var updateChat = function(party, text) {
+
+		var style = 'you';
+		if(party != you) {
+			style = 'other';
+		}
+
+		var line = $('<div><span class="party"></span> <span class="text"></span></div>');
+		line.find('.party').addClass(style).text(party + ':');
+		line.find('.text').text(text);
+
+		chat.append(line);
+
+		chat.stop().animate({ scrollTop: chat.prop("scrollHeight")});
+
+	}
+
+	// event binding
+	$('.input').bind('keydown', function(e) {
+		if(e.keyCode == 13) {
+			submitChat();
+		}
+	});
+	$('.input a').bind('click', submitChat);
+
+	// initial chat state
+	updateChat(robot, 'Hi there. Try typing something!');
+
+});
