@@ -29,7 +29,7 @@ function chatBot() {
 			return "what's so funny?";
 
 		if(this.match('^no+(\\s|!|\\.|$)'))
-			return "don't be such a negative nancy :(";
+			return "don't be such a negative person or whatever you are :(";
 
 		if(this.match('(cya|bye|see ya|ttyl|talk to you later)'))
 			return ["alright, see you around", "good teamwork!"];
