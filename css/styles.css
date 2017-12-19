@@ -1,6 +1,5 @@
-body {
-  text-align: center;
-  font-family: courier;
+body{
+  background-color:#EEE;
 }
 
 .chat{
@@ -43,7 +42,7 @@ body {
             margin: 0 10px 0 0;
           }
 
-          .faded{
+          .fa{
             position:absolute;
             top:5px;
             right:7px;

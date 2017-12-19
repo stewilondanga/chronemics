@@ -26,7 +26,7 @@ $(document).ready(function(){
 
         if(messageLength > 0){
           $('input', this).removeClass('error');
-          $messagesBox.append('<div class="message"><i class="faded"></i> <p>' + message +'</p></div>');
+          $messagesBox.append('<div class="message"><i class="fa fa-close"></i> <p>' + message +'</p></div>');
         }else{
           $('input', this).addClass('error');
         }
@@ -40,20 +40,22 @@ $(document).ready(function(){
   });  // form
 
   // delete massage
-  $(document).on('click', '.faded', function(){
+  $(document).on('click', '.fa-close', function(){
      $(this).parent().fadeOut(500,function(){
       $(this).remove();
       });
    });
 
   // mouse enter add class
-  $(document).on('mouseenter', '.faded', function(){
+  $(document).on('mouseenter', '.fa-close', function(){
     $(this).parent().addClass('active');
   });
 
   // mouse leave remove class
-  $(document).on('mouseleave', '.faded', function(){
+  $(document).on('mouseleave', '.fa-close', function(){
     $(this).parent().removeClass('active');
   });
 
 });  // document ready
+
+  
