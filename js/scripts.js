@@ -26,7 +26,7 @@ $(document).ready(function(){
 
         if(messageLength > 0){
           $('input', this).removeClass('error');
-          $messagesBox.append('<div class="message"><i class="fa fa-close"></i> <p>' + message +'</p></div>');
+          $messagesBox.append('<div class="message"><i class="faded"></i> <p>' + message +'</p></div>');
         }else{
           $('input', this).addClass('error');
         }
